@@ -32,8 +32,13 @@ bool posOnMap(int x, int y)
     return x > 0 && y > 0 && x < MAP_WIDTH && y < MAP_HEIGHT;
 }
 
+int toArrayIndex(int x, int y)
+{
+    return y * MAP_WIDTH + x;
+}
+
 const int mapArraySize = MAP_WIDTH * MAP_HEIGHT;
-char* getMap()
+char* getMap(Vector2D pos)
 {
     //initialise map
     char* map = new char[mapArraySize];
@@ -42,12 +47,14 @@ char* getMap()
 
     drawLinesToMap(map);
 
+    map[toArrayIndex(pos.x, pos.y)] = '.';
+
     return map;
 }
 
-void drawMap()
+void drawMap(Vector2D pos)
 {
-    char* map = getMap();
+    char* map = getMap(pos);
     char buffer[MAP_WIDTH * 2 * MAP_HEIGHT + MAP_HEIGHT];
     int bufferIndex = 0;
     for (int y = 0; y < MAP_HEIGHT; y++)
