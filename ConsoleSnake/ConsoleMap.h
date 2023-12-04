@@ -51,7 +51,7 @@ char* getMap(Piece* pieces, int numberOfPieces, Vector2D foodPos)
     //draw snake
     for (int i = 0; i < numberOfPieces; i++)
     {
-        map[toArrayIndex(pieces[i].pos.x, pieces[i].pos.y)] = '.';
+        map[toArrayIndex(pieces[i].pos.x, pieces[i].pos.y)] = 'O';
     }
 
     //draw food
