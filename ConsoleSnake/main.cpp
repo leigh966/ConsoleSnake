@@ -37,6 +37,7 @@ int main()
         long millisecondsDiffernce = duration_cast<milliseconds>(now - lastCheckpoint).count();
         if (millisecondsDiffernce >= updateSeperationMilliseconds)
         {
+            useInstruction(&player.pieces[0].facing);
             bool gameOver = player.Move(&foodPos);
             if (foodPos.x == -1) generateFood(player);
             if (gameOver)

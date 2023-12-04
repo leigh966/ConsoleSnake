@@ -28,6 +28,12 @@ Vector2D Vector2D::operator+(const Vector2D& other)
     return Vector2D(this->x + other.x, this->y + other.y);
 }
 
+Vector2D Vector2D::operator*(const int& factor)
+{
+    return Vector2D(this->x * factor, this->y * factor);
+}
+
+
 Vector2D::Vector2D(int x, int y)
 {
     this->x = x;
