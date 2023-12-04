@@ -3,6 +3,7 @@
 #include "ImageGrid.h"
 #include "Vector2D.h"
 #include "Line.h"
+#include "Piece.h"
 using namespace std;
 
 const int MAP_WIDTH = 20, MAP_HEIGHT = 20;
@@ -38,7 +39,7 @@ int toArrayIndex(int x, int y)
 }
 
 const int mapArraySize = MAP_WIDTH * MAP_HEIGHT;
-char* getMap(Vector2D pos)
+char* getMap(Piece* pieces, int numberOfPieces, Vector2D foodPos)
 {
     //initialise map
     char* map = new char[mapArraySize];
@@ -46,15 +47,22 @@ char* getMap(Vector2D pos)
     initializeCharArray(map, mapArraySize, ' ');
 
     drawLinesToMap(map);
+    
+    //draw snake
+    for (int i = 0; i < numberOfPieces; i++)
+    {
+        map[toArrayIndex(pieces[i].pos.x, pieces[i].pos.y)] = '.';
+    }
 
-    map[toArrayIndex(pos.x, pos.y)] = '.';
+    //draw food
+    map[toArrayIndex(foodPos.x, foodPos.y)] = '+';
 
     return map;
 }
 
-void drawMap(Vector2D pos)
+void drawMap(Piece* pieces, int numberOfPieces, Vector2D foodPos)
 {
-    char* map = getMap(pos);
+    char* map = getMap(pieces, numberOfPieces, foodPos);
     char buffer[MAP_WIDTH * 2 * MAP_HEIGHT + MAP_HEIGHT];
     int bufferIndex = 0;
     for (int y = 0; y < MAP_HEIGHT; y++)

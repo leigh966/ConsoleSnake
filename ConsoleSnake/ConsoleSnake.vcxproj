@@ -137,6 +137,7 @@
     <ClInclude Include="ImageGrid.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="Piece.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
