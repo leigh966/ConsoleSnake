@@ -19,6 +19,11 @@ void generateFood(Snake player)
 }
 
 
+bool outOfBounds(Vector2D* pos)
+{
+    return pos->x < 1 || pos->x > MAP_WIDTH - 1 || pos->y < 1 || pos->y > MAP_HEIGHT - 1;
+}
+
 int main()
 {
     using namespace std::this_thread; // sleep_for, sleep_until
@@ -38,7 +43,7 @@ int main()
         if (millisecondsDiffernce >= updateSeperationMilliseconds)
         {
             useInstruction(&player.pieces[0].facing);
-            bool gameOver = player.Move(&foodPos);
+            bool gameOver = player.Move(&foodPos) || outOfBounds(&player.pieces[0].pos);
             if (foodPos.x == -1) generateFood(player);
             if (gameOver)
             {
