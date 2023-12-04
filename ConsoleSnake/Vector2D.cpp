@@ -12,3 +12,8 @@ void Vector2D::transform(int x, int y)
     this->x += x;
     this->y += y;
 }
+
+bool Vector2D::operator==(const Vector2D& other)
+{
+    return this->x == other.x && this->y == other.y;
+}

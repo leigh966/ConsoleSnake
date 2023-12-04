@@ -6,4 +6,5 @@ public:
     int x, y;
     static void rotateVector(Vector2D* vect, float deg);
     void transform(int x, int y);
+    bool operator==(const Vector2D& other);
 };

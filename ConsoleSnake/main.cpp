@@ -24,7 +24,12 @@ int main()
         long millisecondsDiffernce = duration_cast<milliseconds>(now - lastCheckpoint).count();
         if (millisecondsDiffernce >= updateSeperationMilliseconds)
         {
-            player.Move(foodPos);
+            bool gameOver = player.Move(foodPos);
+            if (gameOver)
+            {
+                cout << "\nGame Over\nScore: " << player.count() - 1;
+                break;
+            }
             lastCheckpoint = now;
         }
         drawMap(player.pieces, player.count(), foodPos);

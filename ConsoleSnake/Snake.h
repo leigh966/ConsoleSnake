@@ -11,12 +11,13 @@ private:
     
     void addHead();
     bool touchingFood(Vector2D foodPos);
+    bool touchingSelf();
     
 public:
     Snake();
     Piece pieces[maxLength];
     int count();
-	void Move(Vector2D foodPos);
+	bool Move(Vector2D foodPos);
     void Grow();
 
 };

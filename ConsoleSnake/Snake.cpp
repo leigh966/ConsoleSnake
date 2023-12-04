@@ -12,7 +12,7 @@ void Snake::Grow()
 bool Snake::touchingFood(Vector2D foodPos)
 {
     Vector2D headPos = pieces[0].pos;
-    return headPos.x == foodPos.x && headPos.y == foodPos.y;
+    return headPos == foodPos;
 }
 
 
@@ -29,7 +29,7 @@ void Snake::addHead()
     numPieces = 1;
 }
 
-void Snake::Move(Vector2D foodPos)
+bool Snake::Move(Vector2D foodPos)
 {
     for (int i = 0; i < numPieces; i++)
     {
@@ -50,9 +50,21 @@ void Snake::Move(Vector2D foodPos)
     {
         Grow();
     }
+    return touchingSelf();
 }
 
 Snake::Snake()
 {
     addHead();
+}
+
+bool Snake::touchingSelf()
+{
+    Vector2D headPos = pieces[0].pos;
+    for (int i = 2; i < numPieces; i++)
+    {
+        Vector2D thisPiecePos = pieces[i].pos;
+        if (headPos == thisPiecePos) return true;
+    }
+    return false;
 }
