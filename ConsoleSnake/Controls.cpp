@@ -6,29 +6,36 @@ bool keyDown(char keyCode)
 }
 
 
-bool handleControls(Vector2D* facing)
+bool handleControls(Vector2D* facing, Vector2D piece2Pos, Vector2D headPos)
 {
-    const float speed = 0.1f;
     if (keyDown('Q'))
     {
         return false;
     }
+    Vector2D newFacing = *facing;
     if (keyDown('W'))
     {
-        *facing = {0,-1};
+        newFacing = {0,-1};
     }
     if (keyDown('S'))
     {
-        *facing = { 0,1 };
+        newFacing = { 0,1 };
     }
     if (keyDown('A'))
     {
-        *facing = {-1,0};
+        newFacing = {-1,0};
     }
     if (keyDown('D'))
     {
-        *facing = { 1,0 };
+        newFacing = { 1,0 };
     }
-
+    if (*facing == newFacing)
+    {
+        return true;
+    }
+    if ((headPos + newFacing) != piece2Pos)
+    {
+        *facing = newFacing;
+    }
     return true;
 }

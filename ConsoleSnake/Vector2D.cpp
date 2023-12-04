@@ -17,3 +17,24 @@ bool Vector2D::operator==(const Vector2D& other)
 {
     return this->x == other.x && this->y == other.y;
 }
+
+bool Vector2D::operator!=(const Vector2D& other)
+{
+    return !(*this == other);
+}
+
+Vector2D Vector2D::operator+(const Vector2D& other)
+{
+    return Vector2D(this->x + other.x, this->y + other.y);
+}
+
+Vector2D::Vector2D(int x, int y)
+{
+    this->x = x;
+    this->y = y;
+}
+
+Vector2D::Vector2D()
+{
+
+}

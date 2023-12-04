@@ -33,7 +33,7 @@ int main()
             lastCheckpoint = now;
         }
         drawMap(player.pieces, player.count(), foodPos);
-        keepGoing = handleControls(&player.pieces[0].facing);
+        keepGoing = handleControls(&player.pieces[0].facing, player.pieces[1].pos, player.pieces[0].pos);
         sleep_for(nanoseconds(1000));
     }
 }
