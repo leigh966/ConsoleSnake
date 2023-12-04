@@ -4,10 +4,11 @@
 #include "main.h"
 
 Vector2D foodPos = { 7,7 };
+Vector2D MAP_UPPER_BOUND = { MAP_WIDTH - 2, MAP_HEIGHT - 2 };
 std::random_device dev;
 std::mt19937 rng(dev());
-std::uniform_int_distribution<std::mt19937::result_type> widthDist(1, MAP_WIDTH-1);
-std::uniform_int_distribution<std::mt19937::result_type> heightDist (1, MAP_HEIGHT - 1);
+std::uniform_int_distribution<std::mt19937::result_type> widthDist(1, MAP_UPPER_BOUND.x);
+std::uniform_int_distribution<std::mt19937::result_type> heightDist (1, MAP_UPPER_BOUND.y);
 // hacky and will cause slowdowns for late game - change this!!!
 void generateFood(Snake player)
 {
@@ -21,7 +22,7 @@ void generateFood(Snake player)
 
 bool outOfBounds(Vector2D* pos)
 {
-    return pos->x < 1 || pos->x > MAP_WIDTH - 1 || pos->y < 1 || pos->y > MAP_HEIGHT - 1;
+    return pos->x < 1 || pos->x > MAP_UPPER_BOUND.x || pos->y < 1 || pos->y > MAP_UPPER_BOUND.y;
 }
 
 int main()
