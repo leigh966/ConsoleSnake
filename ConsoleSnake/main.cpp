@@ -10,13 +10,13 @@ std::mt19937 rng(dev());
 std::uniform_int_distribution<std::mt19937::result_type> widthDist(1, MAP_UPPER_BOUND.x);
 std::uniform_int_distribution<std::mt19937::result_type> heightDist (1, MAP_UPPER_BOUND.y);
 // hacky and will cause slowdowns for late game - change this!!!
-void generateFood(Snake player)
+void generateFood(Snake* player)
 {
     do
     {
         // generate food at random position
         foodPos = {(int)widthDist(rng), (int)heightDist(rng)};
-    } while (player.Occupies(foodPos)); // there is a snake piece at this position
+    } while (player->Occupies(foodPos)); // there is a snake piece at this position
 }
 
 
@@ -43,9 +43,9 @@ int main()
         long millisecondsDiffernce = duration_cast<milliseconds>(now - lastCheckpoint).count();
         if (millisecondsDiffernce >= updateSeperationMilliseconds)
         {
-            useInstruction(&player.pieces[0].facing);
+            useInstruction(&player.Head()->facing);
             bool gameOver = player.Move(&foodPos) || outOfBounds(&player.pieces[0].pos);
-            if (foodPos.x == -1) generateFood(player);
+            if (foodPos.x == -1) generateFood(&player);
             if (gameOver)
             {
                 cout << "\nGame Over\nScore: " << player.count() - 1;
@@ -54,7 +54,7 @@ int main()
             lastCheckpoint = now;
         }
         drawMap(player.pieces, player.count(), foodPos);
-        keepGoing = handleControls(&player.pieces[0].facing, player.pieces[1].pos, player.pieces[0].pos);
+        keepGoing = handleControls(&player.Head()->facing, &player.pieces[1].pos, &player.Head()->pos);
         sleep_for(nanoseconds(1000));
     }
 }

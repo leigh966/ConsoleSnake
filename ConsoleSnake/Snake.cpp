@@ -61,7 +61,7 @@ Snake::Snake()
 
 bool Snake::touchingSelf()
 {
-    Vector2D headPos = pieces[0].pos;
+    Vector2D headPos = Head()->pos;
     for (int i = 2; i < numPieces; i++)
     {
         Vector2D thisPiecePos = pieces[i].pos;
@@ -77,4 +77,9 @@ bool Snake::Occupies(Vector2D pos)
         if (pieces[i].pos == pos) return true;
     }
     return false;
+}
+
+Piece* Snake::Head()
+{
+    return pieces;
 }

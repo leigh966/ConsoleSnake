@@ -21,7 +21,7 @@ bool allowedAfterLastInstruction(Vector2D instruction)
     return instruction * -1 != inputQueue.back() && instruction!= inputQueue.back();
 }
 
-bool handleControls(Vector2D* facing, Vector2D piece2Pos, Vector2D headPos)
+bool handleControls(Vector2D* facing, Vector2D* piece2Pos, Vector2D* headPos)
 {
 
     if (keyDown('Q'))
@@ -52,7 +52,7 @@ bool handleControls(Vector2D* facing, Vector2D piece2Pos, Vector2D headPos)
         {
             return true;
         }
-        bool allowedNow = (headPos + newFacing) != piece2Pos;
+        bool allowedNow = (*headPos + newFacing) != *piece2Pos;
         if (inputQueue.size() == 0 && allowedNow || inputQueue.size() > 0 && allowedAfterLastInstruction(newFacing))
         {
             inputQueue.push(newFacing);

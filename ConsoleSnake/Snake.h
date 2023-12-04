@@ -20,4 +20,5 @@ public:
 	bool Move(Vector2D* foodPos);
     void Grow();
     bool Occupies(Vector2D);
+    Piece* Head();
 };
