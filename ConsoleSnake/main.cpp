@@ -28,7 +28,14 @@ void move()
     {
         pieces[i].pos.transform(pieces[i].facing.x, pieces[i].facing.y);
     }
-    if(pieces[numPieces-1].facing.x == 0 && pieces[numPieces-1].facing.y == 0)
+    for (int i = numPieces - 1; i > 0; i--)
+    {
+
+            pieces[i].facing = pieces[i - 1].facing;
+        
+    }
+
+    if(pieces[numPieces-1].facing.x == 0 && pieces[numPieces-1].facing.y == 0) // if we have a new piece that hasn't moved yet
     {
         pieces[numPieces-1].facing = pieces[numPieces - 2].facing; // start moving new piece
     }
