@@ -3,5 +3,5 @@
 #include <Windows.h>
 
 bool keyDown(char keyCode);
-bool handleControls();
+bool handleControls(Vector2D* facing);
 

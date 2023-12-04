@@ -4,10 +4,11 @@
 #include "main.h"
 
 Vector2D pos = { 5, 5 };
-
+Vector2D facing = { 1,0 };
 void move()
 {
-    pos.x += 1;
+    pos.x += facing.x;
+    pos.y += facing.y;
 }
 
 int main()
@@ -29,7 +30,7 @@ int main()
             lastCheckpoint = now;
         }
         drawMap(pos);
-        keepGoing = handleControls();
+        keepGoing = handleControls(&facing);
         sleep_for(nanoseconds(1000));
     }
 }

@@ -6,7 +6,7 @@ bool keyDown(char keyCode)
 }
 
 
-bool handleControls()
+bool handleControls(Vector2D* facing)
 {
     const float speed = 0.1f;
     if (keyDown('Q'))
@@ -15,15 +15,19 @@ bool handleControls()
     }
     if (keyDown('W'))
     {
+        *facing = {0,-1};
     }
     if (keyDown('S'))
     {
+        *facing = { 0,1 };
     }
     if (keyDown('A'))
     {
+        *facing = {-1,0};
     }
     if (keyDown('D'))
     {
+        *facing = { 1,0 };
     }
 
     return true;
