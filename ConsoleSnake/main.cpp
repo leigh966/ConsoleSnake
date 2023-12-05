@@ -27,7 +27,7 @@ bool outOfBounds(Vector2D* pos)
 
 int main()
 {
-    using namespace std::this_thread; // sleep_for, sleep_until
+    using namespace std::this_thread; 
     using namespace std::chrono; // nanoseconds, system_clock, seconds
     using std::chrono::system_clock;
     steady_clock::time_point lastCheckpoint = steady_clock::now();
@@ -56,7 +56,6 @@ int main()
         }
         
         keepGoing = handleControls(&player.Head()->facing, &player.pieces[1].pos, &player.Head()->pos);
-        sleep_for(nanoseconds(1000));
     }
 }
 
