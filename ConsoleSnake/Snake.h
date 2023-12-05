@@ -8,16 +8,15 @@ class Snake
 {
 private:
     int numPieces = 0;
-    
     void addHead();
-    bool touchingFood(Vector2D foodPos);
     bool touchingSelf();
     
 public:
+    bool touchingFood(Vector2D foodPos);
     Snake();
     Piece pieces[maxLength];
     int count();
-	bool Move(Vector2D* foodPos, long*frameTime);
+	bool Move();
     void Grow();
     bool Occupies(Vector2D);
     Piece* Head();

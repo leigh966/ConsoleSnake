@@ -25,6 +25,34 @@ bool outOfBounds(Vector2D* pos)
     return pos->x < 1 || pos->x > MAP_UPPER_BOUND.x || pos->y < 1 || pos->y > MAP_UPPER_BOUND.y;
 }
 
+long updateSeperationMilliseconds = 500;
+const float frameTimeFactor = 0.95f;
+void speedUp()
+{
+    updateSeperationMilliseconds = (int)((float)(updateSeperationMilliseconds) * frameTimeFactor);
+}
+
+bool update(Snake* player)
+{
+    useInstruction(&player->Head()->facing);
+    bool gameOver = player->Move() || outOfBounds(&player->Head()->pos);
+
+    if (gameOver)
+    {
+        cout << "\nGame Over\nScore: " << player->count() - 1;
+        return true;
+    }
+    if (player->touchingFood(foodPos))
+    {
+        player->Grow();
+        generateFood(player);
+        speedUp();
+    }
+    drawMap(player->pieces, player->count(), foodPos);
+
+    return false;
+}
+
 int main()
 {
     using namespace std::this_thread; 
@@ -33,7 +61,7 @@ int main()
     steady_clock::time_point lastCheckpoint = steady_clock::now();
     bool keepGoing = true;
     long clock = 0;
-    long updateSeperationMilliseconds = 500;
+    
 
     Snake player = Snake();
 
@@ -43,16 +71,8 @@ int main()
         long millisecondsDiffernce = duration_cast<milliseconds>(now - lastCheckpoint).count();
         if (millisecondsDiffernce >= updateSeperationMilliseconds)
         {
-            useInstruction(&player.Head()->facing);
-            bool gameOver = player.Move(&foodPos, &updateSeperationMilliseconds) || outOfBounds(&player.pieces[0].pos);
-            if (foodPos.x == -1) generateFood(&player);
-            if (gameOver)
-            {
-                cout << "\nGame Over\nScore: " << player.count() - 1;
-                break;
-            }
+            if (update(&player)) return 1;
             lastCheckpoint = now;
-            drawMap(player.pieces, player.count(), foodPos);
         }
         
         keepGoing = handleControls(&player.Head()->facing, &player.pieces[1].pos, &player.Head()->pos);
