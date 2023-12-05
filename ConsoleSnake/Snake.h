@@ -17,7 +17,7 @@ public:
     Snake();
     Piece pieces[maxLength];
     int count();
-	bool Move(Vector2D* foodPos);
+	bool Move(Vector2D* foodPos, long*frameTime);
     void Grow();
     bool Occupies(Vector2D);
     Piece* Head();

@@ -33,7 +33,7 @@ int main()
     steady_clock::time_point lastCheckpoint = steady_clock::now();
     bool keepGoing = true;
     long clock = 0;
-    const long updateSeperationMilliseconds = 500;
+    long updateSeperationMilliseconds = 500;
 
     Snake player = Snake();
 
@@ -44,7 +44,7 @@ int main()
         if (millisecondsDiffernce >= updateSeperationMilliseconds)
         {
             useInstruction(&player.Head()->facing);
-            bool gameOver = player.Move(&foodPos) || outOfBounds(&player.pieces[0].pos);
+            bool gameOver = player.Move(&foodPos, &updateSeperationMilliseconds) || outOfBounds(&player.pieces[0].pos);
             if (foodPos.x == -1) generateFood(&player);
             if (gameOver)
             {

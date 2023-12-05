@@ -29,7 +29,13 @@ void Snake::addHead()
     numPieces = 1;
 }
 
-bool Snake::Move(Vector2D* foodPos)
+const float frameTimeFactor = 0.95f;
+void speedUp(long* frameTime)
+{
+    *frameTime = (int)((float)(*frameTime)*frameTimeFactor);
+}
+
+bool Snake::Move(Vector2D* foodPos, long* frameTime)
 {
     for (int i = 0; i < numPieces; i++)
     {
@@ -49,7 +55,8 @@ bool Snake::Move(Vector2D* foodPos)
     if (touchingFood(*foodPos))
     {
         Grow();
-        foodPos->x = -1; //mark that there is no longer food on the map 
+        foodPos->x = -1; //mark that there is no longer food on the map
+        speedUp(frameTime);
     }
     return touchingSelf();
 }
