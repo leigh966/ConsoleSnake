@@ -52,8 +52,9 @@ int main()
                 break;
             }
             lastCheckpoint = now;
+            drawMap(player.pieces, player.count(), foodPos);
         }
-        drawMap(player.pieces, player.count(), foodPos);
+        
         keepGoing = handleControls(&player.Head()->facing, &player.pieces[1].pos, &player.Head()->pos);
         sleep_for(nanoseconds(1000));
     }
